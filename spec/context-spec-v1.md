@@ -132,3 +132,19 @@ Every entry MUST include a `privacy` field:
   "archive": []
 }
 ```
+
+## v1.1 Additions (context + temporality)
+
+### context field (all entry types)
+- NarrativeEvent, JournalEntry, FeedbackEntry, ProfileEntry: add `context` field
+- Values: `"coding"` | `"creative"` | `"research"` | `"life"` | `"universal"`
+- Load logic: prefer same-context entries, fallback to universal
+
+### recency_weight (FeedbackEntry)
+- Formula: `max(0.1, 1.0 - days_since / 30)`
+- Accuracy computed over last 50 entries, weighted by recency
+- Per (context, mode) grouping
+
+### expires (ProfileEntry)
+- ISO date or null. null = permanent.
+- Conflict resolution: context-specific > universal. Newer timestamp wins for same context.

@@ -7,6 +7,8 @@ SPEC_VERSION = "1.0"
 
 @dataclass
 class ProfileEntry:
+    context: str = "universal"
+    expires: str | None = None
     value: str
     source: str
     added: str
@@ -32,6 +34,7 @@ class NarrativeEvent:
     impact: str = ""
     tags: list[str] = field(default_factory=list)
     privacy: str = "public"
+    context: str = "universal"
 
     def to_dict(self) -> dict[str, Any]:
         return {k: v for k, v in self.__dict__.items() if v}
@@ -84,6 +87,8 @@ class FeedbackEntry:
     mode: str
     trigger: str
     result: str  # "+" | "-" | "="
+    context: str = "universal"
+    recency_weight: float = 1.0
     switch_to: str | None = None
 
     def to_dict(self) -> dict[str, Any]:

@@ -45,3 +45,9 @@ Don't announce. Just fix.
 ## Token
 
 feedback-log.jsonl max 100 lines. Oldest rotate out.
+
+## Temporality (v2.7)
+
+- Accuracy: last 50 entries only, weighted by recency_weight
+- recency_weight = max(0.1, 1.0 - days_since/30)
+- Per (context, mode) grouping — "coding/task" accuracy separate from "creative/playful"

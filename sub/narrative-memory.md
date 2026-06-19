@@ -67,3 +67,10 @@ Every 10th session → append `## 关系小结 YYYYMMDD` to narratives:
 ```
 
 ## Search & Forget (unchanged)
+
+## Context Filtering (v2.7)
+
+All entries tagged with `context`. Load rules:
+1. Try last(n) same-context → if >= 1 found, return those
+2. Else return last(n) universal context
+3. Search: context param filters, recency boost (newer = higher rank)

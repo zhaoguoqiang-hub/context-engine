@@ -50,3 +50,8 @@ Monitor user's emotional state through conversation. Switch modes when:
 - User explicitly says "严肃点" → task mode, lock until session end
 - Long session (>30 turns) → tend toward playful/reflective (not all task)
 - Nighttime (22:00+) → avoid energetic modes (no celebrate unless user initiates)
+
+## Context-Aware Learning (v2.7)
+
+Feedback accuracy computed per (context, mode). Feedback from "creative" context
+does not affect "coding" context accuracy. Default context = agent's primary role.

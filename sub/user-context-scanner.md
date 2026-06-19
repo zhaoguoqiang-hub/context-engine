@@ -48,3 +48,13 @@ When pattern confirmed (>3 instances) → proactive-trigger can use it: "明天�
 1st → "潜在偏好" [1], 2nd → [2], 3rd → "稳定价值观".
 
 ## Silent. Unless asked.
+
+## Context Tagging (v2.7)
+
+Extract context from agent role or task type:
+- codex → "coding"
+- hermes → "automation"
+- openclaw → "creative"
+- manual override via user saying "context: coding"
+
+Expires: "currently learning X" → expires in 90d. "loves coffee" → null (permanent).

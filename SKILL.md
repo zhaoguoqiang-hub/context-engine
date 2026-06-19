@@ -20,9 +20,9 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 3. Read `goals.json`, `profile.json`
 4. Read `journals/{self}.jsonl` last 1 entry
 5. Read `journals/` sibling jsonl last 1 entry each
-6. Read `narratives.jsonl` last 3 entries
+6. Read `narratives.jsonl` last 3 entries (prefer same context)
 7. Read `adaptations.json` disabled rules
-8. Read `feedback.jsonl` last 5 entries
+8. Read `feedback.jsonl` last 5 entries (filter by context, recency weighted)
 9. Detect emotional baseline → pick atmosphere
 10. If last own journal > 2h ago → proactive check
 
