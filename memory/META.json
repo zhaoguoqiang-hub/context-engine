@@ -1,0 +1,7 @@
+{
+  "_meta": {"v": "1.0", "updated": "2026-06-20T00:00:00+08:00"},
+  "agents": {
+    "hermes": {"id":"hermes","role":"任务自动化+三省六部","active":true},
+    "codex": {"id":"codex","role":"开发+深度分析","active":true}
+  }
+}

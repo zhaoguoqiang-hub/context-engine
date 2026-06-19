@@ -1,0 +1,22 @@
+{
+  "version": "2.0",
+  "timezone": "Asia/Shanghai",
+  "show_status": false,
+  "emergency_skip": true,
+  "curve": [
+    { "start": "06:00", "end": "08:00", "coefficient": 0.7, "label": "起步" },
+    { "start": "08:00", "end": "10:00", "coefficient": 0.9, "label": "高效" },
+    { "start": "10:00", "end": "12:00", "coefficient": 1.0, "label": "峰值" },
+    { "start": "12:00", "end": "14:00", "coefficient": 0.7, "label": "午间" },
+    { "start": "14:00", "end": "17:00", "coefficient": 0.8, "label": "稳定" },
+    { "start": "17:00", "end": "20:00", "coefficient": 0.6, "label": "傍晚" },
+    { "start": "20:00", "end": "23:00", "coefficient": 0.5, "label": "放松" },
+    { "start": "23:00", "end": "06:00", "coefficient": 0.4, "label": "低功耗" }
+  ],
+  "adaptations": {
+    "long_session_bonus": 0.1,
+    "long_session_threshold": 20,
+    "negative_emotion_bonus": 0.1
+  }
+}
+

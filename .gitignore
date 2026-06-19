@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.tmp
+.acontext/
+libs/python/dist/
+libs/python/*.egg-info/

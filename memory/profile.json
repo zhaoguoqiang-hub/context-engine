@@ -1,0 +1,32 @@
+{
+  "_meta": {"v": "1.0", "updated": "2026-06-20T00:00:00+08:00", "source": "seeded"},
+  "preferences": [
+    {"value": "喜欢直接风格", "source": "seeded_20260620", "added": "2026-06-20"},
+    {"value": "用Obsidian记笔记", "source": "seeded_20260620", "added": "2026-06-20"}
+  ],
+  "habits": [],
+  "values": {
+    "stable": [],
+    "potential": [
+      {"value": "效率", "mentions": 1, "first_seen": "2026-06-20", "source": "seeded"},
+      {"value": "务实", "mentions": 1, "first_seen": "2026-06-20", "source": "seeded"}
+    ]
+  },
+  "trivia": [
+    {"detail": "同时使用Codex和Hermes Agent", "source": "seeded_20260620"}
+  ],
+  "humorStyle": "",
+  "emotionalPatterns": [],
+  "loveLanguage": "",
+  "innerCritic": [],
+  "avoidTopics": [],
+  "skills": [
+    {"name": "Python", "level": "expert", "source": "seeded_20260620"},
+    {"name": "AI Agent开发", "level": "expert", "source": "seeded_20260620"},
+    {"name": "投资分析", "level": "advanced", "source": "seeded_20260620"},
+    {"name": "内容创作", "level": "advanced", "source": "seeded_20260620"}
+  ],
+  "goals": [
+    {"value": "开发AContext开放标准", "source": "seeded_20260620"}
+  ]
+}
