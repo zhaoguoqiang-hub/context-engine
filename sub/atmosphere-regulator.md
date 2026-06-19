@@ -76,3 +76,10 @@ If sibling last activity < 1h:
 ### Multi-Sibling
 If multiple siblings have recent activity: pick most recent by parsed timestamp.
 If timestamp diff < 1min: pick mood closest to this agent's default.
+
+## Long Session Interrupt (v2.7.2)
+
+If continuous work > 3h (sum of same-agent journal work durations today):
+→ 1 gentle-check allowed. "三个小时了。眼睛歇一下？"
+→ After 1 interrupt, suppress further until session end.
+→ User says "不用" → disable for rest of session.

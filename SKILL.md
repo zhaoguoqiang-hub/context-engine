@@ -14,63 +14,49 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 ## Protocol
 
 **Session start**:
-0. `git pull --rebase` in `~/.acontext/` → get latest + sibling handoffs
-1. Read `META.json` → verify agent registration
-2. **Check `handoffs/{self}.json`** — new handoffs from sibling agents → acknowledge
-3. Read `goals.json`, `profile.json`
-4. Read `journals/{self}.jsonl` last 1 entry
-5. Read `journals/` sibling jsonl last 1 entry each
-6. Read `narratives.jsonl` last 3 entries (prefer same context)
-7. Read `adaptations.json` disabled rules
-8. Read `feedback.jsonl` last 5 entries (filter by context, recency weighted)
-9. Detect emotional baseline → pick atmosphere
-10. If last ANY journal > 2h ago → proactive check
+0. Check user intent signal (first message): "新话题"|"换换脑子"|"fresh" → skip sibling journals, independent session
+0a. Check quick mode: user message < 20 chars AND no emotion keywords (唉|烦|累|哈哈|😭|😊) → skip full protocol, task mode, defer journal write
+1. `git pull --rebase` in `~/.acontext/`
+2. Read own `journals/{self}.jsonl` last 1 entry FIRST (self-context priority)
+3. Read `META.json` → check `cross_agent_awareness`. If false → skip step 4.
+4. Read `journals/` sibling jsonl last 1 entry each (supplement, not main)
+5. Read `narratives.jsonl` last 3 entries (prefer same context)
+6. Read `profile.json`, `goals.json`, `adaptations.json`
+7. Read `feedback.jsonl` last 5 entries (context-filtered, recency-weighted)
+8. Detect emotional baseline → pick atmosphere
+9. Check greeting frequency today → if > 2 already, skip greeting, silent mode switch
+10. Check relationship phase → pick greeting warmth
+11. If last ANY journal > 2h ago → proactive check
 
-**During session**: zero checks. Silent atmosphere switches. `+` `-` `=` feedback.
+**During session**: zero background checks. Silent atmosphere switches on emotional shift.
+After non-task response → monitor next user message for exact `+` `-` `=`.
+**Long session**: if continuous work > 3h → allow 1 gentle-check interruption.
 
-**Session end** (batch):
-1. Signals → append to `narratives.jsonl`
-2. Emotional tone → append to `journals/{self}.jsonl`
-3. Update `profile.json`
-4. Update relationship metrics
-5. **If significant task (user said "完成"+task | deploy/release/merge | new project created | > 2h work) → write `handoffs/{target_agent}.json`**
-6. Append journal entry
-7. Update `reflections.json` if > 7d
-8. Every 10th session → compression
-9. `git add -A && git commit -m "agent:{self} YYYYMMDD HH:MM" && git push`
+**Session end** (batch): signals → narratives | journal append | profile update | handoff | compression | git push
 
-## Agent Handoff
+## Intent Signals
 
-Structured handoff between agents. Not a chat note — a contract.
-Format: what's completed / pending / needed / file paths.
-Acknowledge on receipt. Link in narratives for cross-agent task chain.
-See [sub/handoff.md](sub/handoff.md).
+User can override default continuity:
+| Signal | Effect |
+|--------|--------|
+| "新话题" / "换换脑子" / "fresh" | Independent session. Skip sibling context. Own journal only. |
+| "继续" | Explicit continuity. Full sibling awareness. |
+| (nothing) | Default: continuity with sibling supplement. |
 
-## Profile Merge
+## Quick Mode
 
-Two agents update profile → git merge strategy: field-level timestamp arbitration.
-Newer field wins for conflicts. Non-conflicting fields merge. Merge log appended.
-See [sub/handoff.md](sub/handoff.md) merge section.
+First message < 20 chars AND no emotion keywords → skip full protocol.
+Task mode immediately. Journal append deferred to session end.
 
-## Data Format
+## Greeting Frequency
 
-[spec/context-spec-v1.md](spec/context-spec-v1.md). JSON + JSONL.
+Track today greeting count in journal. > 2 greetings today → silent mode switch.
+No greeting text. Just atmosphere mode. User gets straight to work.
 
-## Git Sync
+## Cross-Agent Awareness Toggle
 
-`~/.acontext/` = git repo. Pull at start, push at end. See [sub/git-sync.md](sub/git-sync.md).
+META.json `cross_agent_awareness: true|false`. Default true.
+User toggles: "关闭跨agent感知" / "开启跨agent感知".
+When false: agent reads only own journal. No sibling awareness. No handoff inbox.
 
-## Feedback · Compression · Transparency · Privacy · Atmosphere · Budgets
-
-(unchanged from v2.5 — see [sub/](sub/) and [references/](references/))
-
-## Sub-skills
-
-atmosphere-regulator | value-aware-guard | proactive-trigger | user-context-scanner | narrative-memory | bootstrap | feedback | git-sync | **handoff** ← new
-
-## References
-
-[VISION.md](VISION.md) · [ROADMAP.md](ROADMAP.md) · [spec/context-spec-v1.md](spec/context-spec-v1.md) · [references/](references/)
-
-## Focus Mode
-User says "专注模式" → disable all proactive for 2h. Auto-restore after 2h.
+## 3 Core Goals
