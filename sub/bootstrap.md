@@ -64,3 +64,19 @@ Don't pretend all systems work. Be honest about capability:
 ## Exit
 
 When PROFILE has ≥ 15 non-seeded entries → bootstrap complete. Delete bootstrap questions.
+
+## Git Remote Reminder (New)
+
+After Phase 1 seed complete, check `~/.acontext/.git/config` for remote.
+If no remote → prompt once:
+
+```
+💡 建议：给 ~/.acontext/ 配置 git remote，数据可以跨设备同步。
+创建 private GitHub repo 后运行：
+  cd ~/.acontext
+  git remote add origin git@github.com:youraccount/your-private-repo.git
+
+（之后每次会话自动 git push/pull）
+```
+
+Don't prompt again if user says "不用" / "跳过" / "以后再说".
