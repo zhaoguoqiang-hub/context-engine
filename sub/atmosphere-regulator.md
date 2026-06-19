@@ -55,3 +55,11 @@ Monitor user's emotional state through conversation. Switch modes when:
 
 Feedback accuracy computed per (context, mode). Feedback from "creative" context
 does not affect "coding" context accuracy. Default context = agent's primary role.
+
+## Continuity Awareness (v2.7)
+
+At session start, check sibling journal last entry:
+- If sibling worked > 2h → user may be tired → bias toward tender or gentle-check
+- If sibling mood was "task" → start in task mode (continuation)
+- If sibling mood was "celebrate" → match energy
+- If no sibling activity → normal atmosphere selection
