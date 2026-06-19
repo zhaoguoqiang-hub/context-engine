@@ -1,6 +1,6 @@
 ---
 name: narrative-memory
-parent: acontext-engine
+parent: context-engine
 load: lazy — session end (batch write)
 ---
 

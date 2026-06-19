@@ -1,6 +1,6 @@
 ---
 name: feedback-loop
-parent: acontext-engine
+parent: context-engine
 load: lazy — after any emotionally-toned response
 ---
 

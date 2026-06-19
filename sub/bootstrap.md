@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-parent: acontext-engine
+parent: context-engine
 type: cold-start protocol
 load: auto — when PROFILE.preferences is empty AND session phase < 3
 ---

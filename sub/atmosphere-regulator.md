@@ -1,6 +1,6 @@
 ---
 name: atmosphere-regulator
-parent: acontext-engine
+parent: context-engine
 replaces: mood-simulator (v2.1)
 load: lazy — session start + on emotional shift
 ---

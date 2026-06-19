@@ -1,5 +1,5 @@
 ---
-name: acontext-engine
+name: context-engine
 description: >
   AContext — persistent context layer for AI agents. File-based, user-owned,
   cross-platform. Git-synced. JSON-standard. Agent-to-agent handoff.
