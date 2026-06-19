@@ -12,7 +12,13 @@ class ProfileManager:
     def read(self) -> dict[str, Any]:
         if not self._path.exists():
             return self._empty()
-        return json.loads(self._path.read_text())
+        try:
+            return json.loads(self._path.read_text())
+        except (json.JSONDecodeError, OSError):
+            bak = self._path.with_suffix('.json.bak')
+            if bak.exists():
+                return json.loads(bak.read_text())
+            return self._empty()
 
     def update(self, updates: dict[str, Any]) -> None:
         current = self.read()
@@ -36,8 +42,12 @@ class ProfileManager:
         return base
 
     def _atomic_write(self, data: dict) -> None:
-        tmp = self._path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(data, ensure_ascii=False, indent=2))
+        content = json.dumps(data, ensure_ascii=False, indent=2)
+        tmp = self._path.with_suffix('.tmp')
+        bak = self._path.with_suffix('.json.bak')
+        tmp.write_text(content)
+        if self._path.exists():
+            self._path.rename(bak)
         tmp.rename(self._path)
 
     @staticmethod

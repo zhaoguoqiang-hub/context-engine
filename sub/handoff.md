@@ -51,3 +51,7 @@ Resolution:
 2. Newer field wins for conflicting fields
 3. Merge non-conflicting fields from both versions
 4. Append `_meta.merge_log` entry: `{"ts":"ISO","merged_from":["agentA","agentB"],"conflicts":["preferences.0"]}`
+
+## Bugfix (v2.7.1)
+
+acknowledge with out-of-range index → silently ignore (no crash).

@@ -51,3 +51,13 @@ feedback-log.jsonl max 100 lines. Oldest rotate out.
 - Accuracy: last 50 entries only, weighted by recency_weight
 - recency_weight = max(0.1, 1.0 - days_since/30)
 - Per (context, mode) grouping — "coding/task" accuracy separate from "creative/playful"
+
+## Bugfixes (v2.7.1)
+
+### Exact Match
+Only trigger on: message IS exactly "+" / "-" / "=", OR starts with "+ " / "- " / "= " (char then space).
+"+1", "++", "+不错" → do NOT trigger.
+
+### Cold Start
+< 5 entries → use default weights: all modes equal weight 1.0.
+No division by zero. After 5 entries, switch to weighted calculation.

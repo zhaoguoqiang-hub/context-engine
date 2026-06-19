@@ -80,3 +80,8 @@ If no remote → prompt once:
 ```
 
 Don't prompt again if user says "不用" / "跳过" / "以后再说".
+
+## Bugfix (v2.7.1)
+
+Phase 2: after 3 consecutive skips → auto-end. Mark `bootstrap_phase2_skipped: true`.
+Don't ask further questions. Profile will populate naturally.

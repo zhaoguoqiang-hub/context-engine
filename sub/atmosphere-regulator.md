@@ -63,3 +63,16 @@ At session start, check sibling journal last entry:
 - If sibling mood was "task" → start in task mode (continuation)
 - If sibling mood was "celebrate" → match energy
 - If no sibling activity → normal atmosphere selection
+
+## Bugfixes (v2.7.1)
+
+### Continuity Detection
+If sibling last activity < 1h:
+- mood=task AND activity < 30min ago → user is mid-work → task mode, greet accordingly
+- mood=task AND activity 30-60min ago → user may have taken break → tender/gentle-check
+- mood=celebrate → match energy
+- mood=tender → user was stressed → stay tender
+
+### Multi-Sibling
+If multiple siblings have recent activity: pick most recent by parsed timestamp.
+If timestamp diff < 1min: pick mood closest to this agent's default.

@@ -74,3 +74,11 @@ All entries tagged with `context`. Load rules:
 1. Try last(n) same-context → if >= 1 found, return those
 2. Else return last(n) universal context
 3. Search: context param filters, recency boost (newer = higher rank)
+
+## Bugfixes (v2.7.1)
+
+### Compression Safety
+Compression MUST leave at least 1 entry regardless of age.
+
+### Context Search Fallback
+If filtered search returns 0: fallback to universal context entries.

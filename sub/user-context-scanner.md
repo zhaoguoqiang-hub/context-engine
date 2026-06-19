@@ -58,3 +58,7 @@ Extract context from agent role or task type:
 - manual override via user saying "context: coding"
 
 Expires: "currently learning X" → expires in 90d. "loves coffee" → null (permanent).
+
+## Bugfix (v2.7.1)
+
+All timestamps parsed as ISO datetime before comparison. String comparison unsafe across timezones.

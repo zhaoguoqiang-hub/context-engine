@@ -24,7 +24,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 7. Read `adaptations.json` disabled rules
 8. Read `feedback.jsonl` last 5 entries (filter by context, recency weighted)
 9. Detect emotional baseline → pick atmosphere
-10. If last own journal > 2h ago → proactive check
+10. If last ANY journal > 2h ago → proactive check
 
 **During session**: zero checks. Silent atmosphere switches. `+` `-` `=` feedback.
 
@@ -33,7 +33,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 2. Emotional tone → append to `journals/{self}.jsonl`
 3. Update `profile.json`
 4. Update relationship metrics
-5. **If significant task completed → write `handoffs/{target_agent}.json`**
+5. **If significant task (user said "完成"+task | deploy/release/merge | new project created | > 2h work) → write `handoffs/{target_agent}.json`**
 6. Append journal entry
 7. Update `reflections.json` if > 7d
 8. Every 10th session → compression
@@ -71,3 +71,6 @@ atmosphere-regulator | value-aware-guard | proactive-trigger | user-context-scan
 ## References
 
 [VISION.md](VISION.md) · [ROADMAP.md](ROADMAP.md) · [spec/context-spec-v1.md](spec/context-spec-v1.md) · [references/](references/)
+
+## Focus Mode
+User says "专注模式" → disable all proactive for 2h. Auto-restore after 2h.
