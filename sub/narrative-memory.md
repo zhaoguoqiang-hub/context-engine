@@ -1,6 +1,6 @@
 ---
 name: narrative-memory
-parent: soul-system
+parent: acontext-engine
 load: lazy — session end (batch write)
 ---
 

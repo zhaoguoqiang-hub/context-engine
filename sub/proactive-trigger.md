@@ -1,6 +1,6 @@
 ---
 name: proactive-trigger
-parent: soul-system
+parent: acontext-engine
 load: lazy — session start if last journal > 2h ago
 ---
 

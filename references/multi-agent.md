@@ -8,7 +8,7 @@
 ## 方案：单一数据层 + 按 agent 分账本
 
 ```
-~/.agents/skills/soul-system/memory/   ← 数据层（唯一）
+~/.agents/skills/acontext-engine/memory/   ← 数据层（唯一）
 ├── PROFILE.md          ← 共享（所有 agent 读同一份）
 ├── GOALS.md            ← 共享
 ├── ADAPTATIONS.md      ← 共享
@@ -20,7 +20,7 @@
 └── META.md             ← agent 注册表
 ```
 
-~/.codex/skills/soul-system → symlink → ~/.agents/skills/soul-system
+~/.codex/skills/acontext-engine → symlink → ~/.agents/skills/acontext-engine
 
 ## 为什么不会冲突
 
@@ -45,7 +45,7 @@
 ## 首次安装（Codex 侧）
 
 ```bash
-ln -sfn ~/.agents/skills/soul-system ~/.codex/skills/soul-system
+ln -sfn ~/.agents/skills/acontext-engine ~/.codex/skills/acontext-engine
 ```
 
 ## Agent 注册

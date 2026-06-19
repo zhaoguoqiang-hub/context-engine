@@ -1,6 +1,6 @@
 ---
 name: user-context-scanner
-parent: soul-system
+parent: acontext-engine
 load: lazy — session end or "记住"
 ---
 

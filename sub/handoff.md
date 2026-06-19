@@ -1,6 +1,6 @@
 ---
 name: handoff
-parent: soul-system
+parent: acontext-engine
 load: lazy — session end (write) AND session start (read inbox)
 ---
 

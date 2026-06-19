@@ -1,6 +1,6 @@
 ---
 name: value-aware-guard
-parent: soul-system
+parent: acontext-engine
 load: lazy — sensitive keyword match
 ---
 

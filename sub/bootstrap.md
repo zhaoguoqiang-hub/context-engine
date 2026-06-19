@@ -1,6 +1,6 @@
 ---
 name: bootstrap
-parent: soul-system
+parent: acontext-engine
 type: cold-start protocol
 load: auto — when PROFILE.preferences is empty AND session phase < 3
 ---

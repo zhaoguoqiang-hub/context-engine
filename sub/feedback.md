@@ -1,6 +1,6 @@
 ---
 name: feedback-loop
-parent: soul-system
+parent: acontext-engine
 load: lazy — after any emotionally-toned response
 ---
 

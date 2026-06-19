@@ -75,4 +75,4 @@ memory.save_context({"input": "帮我部署"}, {"output": "已部署"})
 
 ## Spec
 
-All data follows [AContext Spec v1.0](https://github.com/zhaoguoqiang-hub/soul-system/blob/main/spec/context-spec-v1.md).
+All data follows [AContext Spec v1.0](https://github.com/zhaoguoqiang-hub/acontext-engine/blob/main/spec/context-spec-v1.md).

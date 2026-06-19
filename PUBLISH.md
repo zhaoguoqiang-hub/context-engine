@@ -3,7 +3,7 @@
 ## GitHub Release v1.0
 
 ```bash
-cd /Users/zhaoguoqiang/soul-system
+cd /Users/zhaoguoqiang/acontext-engine
 
 # 1. Verify
 find . -type f | wc -l          # should be ~50+
@@ -35,11 +35,11 @@ twine upload dist/*
 
 ```bash
 # Skill only (no code)
-ln -sfn ~/soul-system ~/.agents/skills/soul-system
+ln -sfn ~/acontext-engine ~/.agents/skills/acontext-engine
 
 # Python library
 pip install acontext
-# or: pip install git+https://github.com/zhaoguoqiang-hub/soul-system.git#subdirectory=libs/python
+# or: pip install git+https://github.com/zhaoguoqiang-hub/acontext-engine.git#subdirectory=libs/python
 
 # LangChain
 pip install acontext[langchain]
