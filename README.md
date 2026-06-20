@@ -21,7 +21,7 @@ Next session, your agent does this automatically:
 ```
 # session start → git pull (skip if offline)
 # read journals → "上次 coding session 做到一半"
-# read profile → "强哥喜欢直接风格"
+# read profile → "Boss喜欢直接风格"
 # check goals  → "AContext 开发中 (priority 10)"
 ```
 
