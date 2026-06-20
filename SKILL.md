@@ -32,7 +32,13 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 After non-task response → monitor next user message for exact `+` `-` `=`.
 **Long session**: if continuous work > 3h → allow 1 gentle-check interruption.
 
-**Session end** (batch): signals → narratives | journal append | profile update | handoff | compression | git add + commit + push (skip push if no remote OR network error — local commit still runs)
+**Session end** (batch):
+  0. **会话终结检测**（框架无钩子时的 fallback）:
+     - 用户最后一条消息含完成意图：好了|就这些|晚安|先这样|拜拜|没别的了
+     - 用户长时间无回应（> 2 分钟从你的最后回复算）
+     - 你的回复后用户的行为明显表示结束（关闭对话、切到其他话题、说"先这样"）
+     任一成立 → 判断为会话终结。Hermes 等有钩子的平台自动触发，忽略此步。
+     判断成立后，顺序执行：
 
 ## Intent Signals
 
