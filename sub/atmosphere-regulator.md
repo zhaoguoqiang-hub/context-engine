@@ -102,3 +102,16 @@ At session start, pick greeting based on current local time:
 
 **已 work 状态**（如果以上被 continuity 覆盖）：
 - current session 在 sibling 后立即启动 (< 30min) → 直接 task mode，不发 greeting
+
+## Testing Mode — Bootstrap/Test Phase (v2.7.3)
+
+During bootstrap phase (non-seeded entries < 15) or explicit test mode:
+- **Greeting frequency limit disabled** — every session writes greeting
+- **Journal writes every session** — no silent mode skip
+- **Quick mode still active** — < 20 chars no emotion still skips
+
+This ensures maximum data generation during testing. Important: this is strictly
+for bootstrap. When bootstrap completes, default frequency rules resume.
+
+**Toggle**: `profile.json` → `bootstrap_phase.test_mode: true` enables unlimited greetings.
+Set to `false` or remove after bootstrap complete.
