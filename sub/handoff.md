@@ -8,6 +8,23 @@ load: lazy — session end (write) AND session start (read inbox)
 
 Agent-to-agent structured handoff. Not a note — a contract.
 
+## Significant Task — Definition (v2.7.3)
+
+A task is "significant" when it meets **any one** of:
+
+| # | Condition | Example |
+|---|-----------|---------|
+| a | 用户明确说"完成" + 任务名 | "X部署完成了" |
+| b | 部署/发布/merge 操作 | git push, npm publish, docker push |
+| c | 创建了新文件/项目 | 新 repo, 新 skill, 关键文档 |
+| d | 单会话连续工作 > 2h | 长 session 结束时自动标记 |
+| e | 任何涉及 **文件系统写 + 跨 agent** 的操作 | 写了 `~/Output/` 下的内容 |
+
+**不定义**为 significant：
+- 纯查询/搜索/阅读
+- 单 agent 内部运维（journal、profile 更新）
+- 用户说"不相关"/"不用告诉另一个"
+
 ## Write (session end, after significant task)
 
 When agent completes a task that another agent should know about,
