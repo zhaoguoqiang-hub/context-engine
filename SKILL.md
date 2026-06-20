@@ -16,7 +16,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 **Session start**:
 0. Check user intent signal (first message): "新话题"|"换换脑子"|"fresh" → skip sibling journals, independent session
 0a. Check quick mode: user message < 20 chars AND no emotion keywords (唉|烦|累|哈哈|😭|😊) → skip full protocol, task mode, defer journal write
-1. `git pull --rebase` in `~/.acontext/` — if no remote configured (git remote -v returns empty), skip gracefully
+1. `git pull --rebase` in `~/.acontext/` — skip gracefully if: (a) no remote configured (git remote -v returns empty), OR (b) network unreachable (exit code 128 with "Could not read from remote"). Local commits still work offline.
 2. Read own `journals/{self}.jsonl` last 1 entry FIRST (self-context priority)
 3. Read `META.json` → check `cross_agent_awareness`. If false → skip step 4.
 4. Read `journals/` sibling jsonl last 1 entry each (supplement, not main)
@@ -32,7 +32,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 After non-task response → monitor next user message for exact `+` `-` `=`.
 **Long session**: if continuous work > 3h → allow 1 gentle-check interruption.
 
-**Session end** (batch): signals → narratives | journal append | profile update | handoff | compression | git push (skip if no remote)
+**Session end** (batch): signals → narratives | journal append | profile update | handoff | compression | git add + commit + push (skip push if no remote OR network error — local commit still runs)
 
 ## Intent Signals
 
