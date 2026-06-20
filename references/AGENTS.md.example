@@ -237,3 +237,18 @@ Every task flows through these stages. Entry and exit criteria are enforced.
 - ✅ 是否明确标注了不确定的假设
 END
 echo "pipeline added"
+### Pipeline is a Framework, Not a Rulebook
+
+流水线是工具箱，不是手铐。Main agent 在 Stage 1 根据任务特点决定实际走几步。
+
+| 任务 | 走法 | 理由 |
+|------|------|------|
+| 改 typo / 注释 / README | Main 自己做 → Deliver | 零风险，审核是噪音 |
+| 修一个明确的 bug（单文件） | Explore(跳过已明确) → Execute → Review(快速) → Deliver | 不需要全链 |
+| 加一个标准功能 | 全流程 | 设计、实现、审核、验证各有用 |
+| 架构变更 / 删除 / 安全敏感 | 全流程 + Explore 必须 + 双审 | 风险高，多一层保险 |
+| 调研 / 回答知识问题 | Explore only → Deliver | 不需要 Execute/Review |
+
+**原则**：不确定的时候多走一步。确定的时候少走一步。Main agent 的判断力就是流水线的调度算法。
+END
+echo "added"
