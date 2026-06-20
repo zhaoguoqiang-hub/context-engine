@@ -88,3 +88,19 @@ context-engine/       ← this repo
 v2.7 — running daily on Hermes + Codex. The spec is stable and agent-agnostic.
 
 [CHANGELOG](CHANGELOG.md) · [Spec](spec/context-spec-v1.md) · [QA Report](references/qa-report.md)
+
+## Deployment Mode
+
+Auto-detected based on git remote configuration. No config file to edit.
+
+| Mode | Remote? | Behavior | Best for |
+|------|---------|----------|----------|
+| **Local** | none | Write + commit only. No push. | Single machine, all agents share filesystem |
+| **Cross-device** | configured | Session start: push + pull. End: commit. | Multiple machines, agents on different hosts |
+| **Daily backup** | configured | Extra push on first session of each day. | Insurance against local data loss |
+
+Detection is implicit — if `git remote -v` returns empty → local mode. That's it.
+
+## Data
+
+All data in `~/.acontext/`. JSON. Migrate with `cp -r`. Sync with `git push`.
