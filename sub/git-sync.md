@@ -8,6 +8,14 @@ load: lazy — session start/end
 
 git repo as sandbox bridge. Push deferred to session start — zero OS dependency.
 
+## 部署模式
+
+| 模式 | 检测 | 行为 |
+|------|------|------|
+| 本地 | 无 remote | journal写作写完，git commit，不push |
+| 跨设备 | 有 remote | start时push+pull，end时commit |
+| 日备份 | 每天首次启动 | 有remote则额外push一次 |
+
 ## Setup (one-time)
 
 ```bash

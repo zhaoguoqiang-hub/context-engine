@@ -16,7 +16,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 **Session start**:
 0. Check user intent signal (first message): "新话题"|"换换脑子"|"fresh" → skip sibling journals, independent session
 0a. Check quick mode: user message < 20 chars AND no emotion keywords (唉|烦|累|哈哈|😭|😊) → skip full protocol, task mode, defer journal write
-1. `git push -q 2>/dev/null; git pull --rebase` in `~/.acontext/` — push last session, pull latest — skip gracefully if: (a) no remote configured (git remote -v returns empty), OR (b) network unreachable (exit code 128 with "Could not read from remote"). Local commits still work offline.
+1. `git push -q 2>/dev/null; git pull --rebase` — ① 无 remote → 本地模式（同机器），跳过推拉不报错。② 有 remote → 跨设备模式，正常同步。③ 日备份：每日首次启动时额外 git push（有 remote 则执行） in `~/.acontext/` — push last session, pull latest — skip gracefully if: (a) no remote configured (git remote -v returns empty), OR (b) network unreachable (exit code 128 with "Could not read from remote"). Local commits still work offline.
 2. Read own `journals/{self}.jsonl` last 1 entry FIRST (self-context priority)
 3. Read `META.json` → check `cross_agent_awareness`. If false → skip step 4.
 4. Read `journals/` sibling jsonl last 1 entry each (supplement, not main)
