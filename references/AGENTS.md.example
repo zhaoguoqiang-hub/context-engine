@@ -125,3 +125,115 @@ Main → 总结交付
 3. 是否会破坏已有功能？（回归）
 4. 有没有硬编码的密钥/token？（安全）
 5. 命名和结构是否符合项目惯例？（一致性）
+
+### Development Pipeline
+
+Every task flows through these stages. Entry and exit criteria are enforced.
+
+```
+用户请求
+  │
+  ▼
+┌─────────────────────────────────────────────┐
+│ Stage 1: Triage                             │
+│ Who: Main                                   │
+│ Entry: user says something                  │
+│ Exit: task classified—simple/complex/critical│
+│ Output: 1-line classification + pipeline选择  │
+└──────────────┬──────────────────────────────┘
+               │
+    ┌──────────┼──────────┐
+    ▼          ▼          ▼
+  simple    complex    critical
+  (快速)    (全流程)   (加双审)
+    │          │          │
+    │          ▼          │
+    │  ┌───────────┐      │
+    │  │ Stage 2:  │      │
+    │  │ Explore   │      │
+    │  │ Who:      │      │
+    │  │ Explorer  │      │
+    │  │ Entry:    │      │
+    │  │ task有    │      │
+    │  │ 不确定性  │      │
+    │  │ Exit:     │      │
+    │  │ 影响范围  │      │
+    │  │ + 风险    │      │
+    │  │ + 边界    │      │
+    │  │ 已明确    │      │
+    │  └─────┬─────┘      │
+    │        ▼             │
+    │  ┌───────────┐      │
+    │  │ Stage 3:  │      │
+    │  │ Design    │      │
+    │  │ Who: Main │      │
+    │  │ Entry:    │      │
+    │  │ Explorer  │      │
+    │  │ 报告完毕  │      │
+    │  │ Exit:     │      │
+    │  │ 方案选定  │      │
+    │  │ +文件映射 │      │
+    │  │ +任务拆分 │      │
+    │  └─────┬─────┘      │
+    │        │             │
+    └────────┼─────────────┘
+             ▼
+    ┌───────────────────┐
+    │ Stage 4: Execute  │
+    │ Who: Worker(s)    │
+    │ Entry: 方案已定   │
+    │ + 文件映射已明确   │
+    │ Exit: 文件已变更   │
+    │ (返回变更列表)     │
+    │                   │
+    │ 可并行: 多个Worker │
+    │ 各自编辑不相交文件  │
+    └────────┬──────────┘
+             ▼
+    ┌───────────────────┐
+    │ Stage 5: Review   │
+    │ Who: Reviewer     │
+    │ Entry: Worker完成 │
+    │ Exit: 5条检查通过  │
+    │                   │
+    │ 正确性? 完整性?    │
+    │ 回归风险? 安全?    │
+    │ 一致性?            │
+    └────────┬──────────┘
+             ▼
+    ┌───────────────────┐
+    │ Stage 6: Verify   │
+    │ Who: Tester       │
+    │ Entry: Reviewer   │
+    │ 已通过            │
+    │ Exit: 行为符合预期 │
+    │                   │
+    │ 边界测试?          │
+    │ 回归测试?          │
+    │ 集成兼容?          │
+    └────────┬──────────┘
+             ▼
+    ┌───────────────────┐
+    │ Stage 7: Deliver  │
+    │ Who: Main         │
+    │ Entry: 全链通过   │
+    │ Exit: 交付+文档    │
+    └───────────────────┘
+```
+
+### Pipeline Selection
+
+| Task Type | Stages | Parallel |
+|-----------|--------|----------|
+| Simple (<10行, 单文件) | Triage → Execute(快速) → Deliver | none |
+| Standard (>10行 or 多文件) | Full pipeline | Worker可并行 |
+| Critical (删除/迁移/安全) | Full pipeline + 双审(Stage 5×2) | none |
+
+### Exit Criteria Checklist
+
+每个 Stage 在通过前，负责的 Agent 必须确认:
+- ✅ 该 Stage 的 entry 条件是否满足
+- ✅ 该 Stage 的输出是否符合规格
+- ✅ 是否明确标注了不确定的假设
+END
+echo "pipeline added"
