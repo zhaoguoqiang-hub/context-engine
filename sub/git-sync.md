@@ -24,12 +24,18 @@ cd .acontext && git add -A && git commit -m "init acontext" && git push
 ## Session Start
 
 ```bash
+cd ~/.acontext && git push -q 2>/dev/null && git pull --rebase 2>/dev/null || true
+```
+
+```bash
 cd ~/.acontext && git pull --rebase 2>/dev/null || true
 ```
 
 Failure → work with local data. Not blocking.
 
-## Session End
+## Session End (keep existing, add note)
+
+Commit only. Push deferred to next session start.
 
 ```bash
 cd ~/.acontext
