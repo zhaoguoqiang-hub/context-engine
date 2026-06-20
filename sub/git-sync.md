@@ -1,67 +1,44 @@
 ---
 name: git-sync
-parent: soul-system
+parent: context-engine
 load: lazy — session start/end
 ---
 
 # Git Sync
 
-git repo as sandbox bridge. File-based + user-owned + cross-agent.
+git repo as sandbox bridge. Push deferred to session start — zero OS dependency.
 
 ## Setup (one-time)
 
 ```bash
-# Create private repo on GitHub: youraccount/acontext
-cd ~
-git clone git@github.com:youraccount/acontext.git .acontext
-# Copy existing soul-system memory files in:
-cp ~/.agents/skills/soul-system/memory/*.jsonl .acontext/
-cp ~/.agents/skills/soul-system/memory/*.json .acontext/
-cp -r ~/.agents/skills/soul-system/memory/journals .acontext/
-cd .acontext && git add -A && git commit -m "init acontext" && git push
+cd ~/.acontext
+git init
+git remote add origin git@github.com:youraccount/private-acontext.git
+git add -A && git commit -m "init" && git push -u origin main
 ```
 
 ## Session Start
 
 ```bash
-cd ~/.acontext && git push -q 2>/dev/null && git pull --rebase 2>/dev/null || true
+cd ~/.acontext && git push -q 2>/dev/null; git pull --rebase 2>/dev/null || true
 ```
+Push last session's commit, then pull latest. Both fail gracefully.
 
-```bash
-cd ~/.acontext && git pull --rebase 2>/dev/null || true
-```
-
-Failure → work with local data. Not blocking.
-
-## Session End (keep existing, add note)
+## Session End
 
 Commit only. Push deferred to next session start.
 
 ```bash
-cd ~/.acontext
-git add -A
-git commit -m "agent:{self} {YYYYMMDD} {HH:MM}" --allow-empty
-git push 2>/dev/null || echo "push failed, saved locally"
+cd ~/.acontext && git add -A && git commit -m "agent:{self} {YYYYMMDD} {HH:MM}" --allow-empty
 ```
 
-Push failure → retry next session. Data safe locally.
+## Failure Handling
+
+- No remote → push skipped silently.
+- Network unreachable → push skipped, data safe locally.
+- Next session start automatically retries push.
 
 ## Conflict Resolution
 
-Only `profile.json` can conflict (two agents update same field):
-
-1. Read both timestamps from `_meta.updated` field
-2. Newer wins for that field
-3. Merge non-conflicting fields from both
-4. Append `_meta.conflicts` note if needed
-
-All other files are append-only → zero conflict by design.
-
-## When to Enable
-
-After Phase 1 complete (JSON migration done). Currently memory files are mixed Markdown.
-Skip git sync until spec migration complete.
-
-## Token
-
-Shell commands only. No token consumption beyond this file load.
+Only `profile.json` can conflict. Field-level timestamp merge.
+All other files append-only → zero conflict by design.
