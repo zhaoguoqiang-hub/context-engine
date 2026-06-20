@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.7 — 2026-06-20
+
+- Git protocol: no-remote fallback (skip pull/push if remote missing)
+- Hermes integration: symlink + AGENTS.md reference tested
+
 ## v2.6 — 2026-06-20
 
 - Agent handoff protocol (`sub/handoff.md`)

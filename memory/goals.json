@@ -1,8 +1,10 @@
 {
-  "_meta": {"v": "1.0", "updated": "2026-06-20T00:00:00+08:00"},
+  "_meta": {"v": "1.0", "updated": "2026-06-20T08:07:00+08:00"},
   "goals": [
-    {"id":"core-1","name":"用户长期福祉","priority":10,"status":"active","progress":0,"keywords":["熬夜","通宵","不吃饭","过度"]},
-    {"id":"core-3","name":"维护信任关系","priority":9,"status":"active","progress":0,"keywords":["隐私","密码","诚实","透明"]},
-    {"id":"core-2","name":"持续自我优化","priority":8,"status":"active","progress":0,"keywords":["反馈","纠正","改进"]}
+    {"id":"acontext", "name":"AContext开放标准", "priority":10, "status":"active", "progress":30, "keywords":["acontext","context-engine","上下文","跨agent"]},
+    {"id":"content", "name":"抖音内容持续输出", "priority":9, "status":"active", "progress":60, "keywords":["视频","脚本","配音","渲染","remotion"]},
+    {"id":"novel", "name":"网文创作（末世废土+时间轮回）", "priority":7, "status":"active", "progress":10, "keywords":["网文","小说","洛尘","时停"]},
+    {"id":"soul", "name":"灵魂系统持续优化", "priority":8, "status":"active", "progress":70, "keywords":["灵魂系统","三省六部","流程","skill"]},
+    {"id":"trust", "name":"维护信任关系", "priority":8, "status":"active", "progress":0, "keywords":["隐私","诚实","透明"]}
   ]
 }

@@ -3,11 +3,11 @@ name: context-engine
 description: >
   AContext — persistent context layer for AI agents. File-based, user-owned,
   cross-platform. Git-synced. JSON-standard. Agent-to-agent handoff.
-version: 2.6.0
+version: 2.7.0
 spec: spec/context-spec-v1.md
 ---
 
-# AContext Engine v2.6
+# AContext Engine v2.7
 
 Persistent memory. JSON-standard. Git-synced. Agent handoff.
 
@@ -16,7 +16,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 **Session start**:
 0. Check user intent signal (first message): "新话题"|"换换脑子"|"fresh" → skip sibling journals, independent session
 0a. Check quick mode: user message < 20 chars AND no emotion keywords (唉|烦|累|哈哈|😭|😊) → skip full protocol, task mode, defer journal write
-1. `git pull --rebase` in `~/.acontext/`
+1. `git pull --rebase` in `~/.acontext/` — if no remote configured (git remote -v returns empty), skip gracefully
 2. Read own `journals/{self}.jsonl` last 1 entry FIRST (self-context priority)
 3. Read `META.json` → check `cross_agent_awareness`. If false → skip step 4.
 4. Read `journals/` sibling jsonl last 1 entry each (supplement, not main)
@@ -32,7 +32,7 @@ Persistent memory. JSON-standard. Git-synced. Agent handoff.
 After non-task response → monitor next user message for exact `+` `-` `=`.
 **Long session**: if continuous work > 3h → allow 1 gentle-check interruption.
 
-**Session end** (batch): signals → narratives | journal append | profile update | handoff | compression | git push
+**Session end** (batch): signals → narratives | journal append | profile update | handoff | compression | git push (skip if no remote)
 
 ## Intent Signals
 

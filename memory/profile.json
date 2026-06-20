@@ -1,32 +1,48 @@
 {
-  "_meta": {"v": "1.0", "updated": "2026-06-20T00:00:00+08:00", "source": "seeded"},
+  "_meta": {"v": "1.0", "updated": "2026-06-20T08:07:00+08:00", "source": "seeded_v2.7"},
   "preferences": [
-    {"value": "喜欢直接风格", "source": "seeded_20260620", "added": "2026-06-20"},
-    {"value": "用Obsidian记笔记", "source": "seeded_20260620", "added": "2026-06-20"}
+    {"value": "开门见山，前3句说核心", "source": "seeded_20260620", "added": "2026-06-20"},
+    {"value": "结构化表达（第一第二第三）", "source": "seeded_20260620", "added": "2026-06-20"},
+    {"value": "用Obsidian记笔记", "source": "seeded_20260620", "added": "2026-06-20"},
+    {"value": "飞书重度用户", "source": "seeded_20260620", "added": "2026-06-20"}
   ],
-  "habits": [],
+  "habits": [
+    {"pattern": "先判断是否适合再动手", "confidence": 3, "source": "seeded_20260620"},
+    {"pattern": "在项目中学习", "confidence": 3, "source": "seeded_20260620"}
+  ],
   "values": {
-    "stable": [],
+    "stable": [
+      {"value": "隐私", "mentions": 3, "first_seen": "2026-06-15"}
+    ],
     "potential": [
-      {"value": "效率", "mentions": 1, "first_seen": "2026-06-20", "source": "seeded"},
-      {"value": "务实", "mentions": 1, "first_seen": "2026-06-20", "source": "seeded"}
+      {"value": "效率", "mentions": 5, "first_seen": "2026-06-20", "source": "session"},
+      {"value": "务实", "mentions": 3, "first_seen": "2026-06-20", "source": "session"},
+      {"value": "数据驱动", "mentions": 2, "first_seen": "2026-06-20", "source": "session"}
     ]
   },
   "trivia": [
-    {"detail": "同时使用Codex和Hermes Agent", "source": "seeded_20260620"}
+    {"detail": "12年产品经验，数据驱动但结合直觉", "source": "seeded_20260620"},
+    {"detail": "同时使用Hermes Agent和Codex", "source": "seeded_20260620"},
+    {"detail": "抖音内容创作者——商业效应+心理效应+AI知识", "source": "seeded_20260620"},
+    {"detail": "正在写网文（末世废土+时间轮回）", "source": "seeded_20260620"},
+    {"detail": "夏天只喝冰美式", "source": "seeded_20260620"}
   ],
-  "humorStyle": "",
-  "emotionalPatterns": [],
+  "humorStyle": "直接带点冷幽默",
+  "emotionalPatterns": [
+    {"pattern": "回复变短/只用'嗯''好'时表示在忙", "occurrences": 0, "confidence": 2}
+  ],
   "loveLanguage": "",
   "innerCritic": [],
-  "avoidTopics": [],
+  "avoidTopics": ["政治敏感内容"],
   "skills": [
     {"name": "Python", "level": "expert", "source": "seeded_20260620"},
     {"name": "AI Agent开发", "level": "expert", "source": "seeded_20260620"},
     {"name": "投资分析", "level": "advanced", "source": "seeded_20260620"},
-    {"name": "内容创作", "level": "advanced", "source": "seeded_20260620"}
+    {"name": "内容创作", "level": "advanced", "source": "seeded_20260620"},
+    {"name": "产品管理", "level": "expert", "source": "seeded_20260620"}
   ],
   "goals": [
-    {"value": "开发AContext开放标准", "source": "seeded_20260620"}
+    {"value": "开发AContext开放标准", "source": "seeded_20260620"},
+    {"value": "持续内容创作（抖音/shorts）", "source": "seeded_20260620"}
   ]
 }
