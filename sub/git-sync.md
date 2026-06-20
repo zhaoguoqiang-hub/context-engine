@@ -50,3 +50,15 @@ cd ~/.acontext && git add -A && git commit -m "agent:{self} {YYYYMMDD} {HH:MM}" 
 
 Only `profile.json` can conflict. Field-level timestamp merge.
 All other files append-only → zero conflict by design.
+
+## Critical: Never Remove Remote
+
+**Never delete or modify `git remote` programmatically.** Invalid remote → push fails gracefully (no output, exit silently). Data stays local.
+
+如果 remote 指向不存在的仓库，换 URL 即可，不要删除：
+
+```bash
+cd ~/.acontext && git remote set-url origin git@github.com:youraccount/正确的仓库.git
+```
+
+Without remote, other machines cannot sync. Local mode still works but cross-device sync and daily backup are disabled.
