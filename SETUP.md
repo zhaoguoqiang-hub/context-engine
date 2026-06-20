@@ -35,9 +35,10 @@ cp ~/context-engine/memory/META.json ~/.acontext/
 ```bash
 cd ~/.acontext
 git init
-git remote add origin git@github.com:youraccount/private-acontext.git
-# Private repo — your agent memory is personal data.
+git remote add origin <your-private-repo-url>
 ```
+
+**No-remote mode**: If you don't set a remote, `git pull` and `git push` in the protocol are gracefully skipped. Local versioning still works — you just won't sync across machines.
 
 After this, every session auto pulls/pushes.
 
