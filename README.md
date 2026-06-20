@@ -1,35 +1,31 @@
 # AContext
 
-**`.git` for agent memory.** A directory on your machine that every AI agent
-reads and writes — profile, goals, session logs, handoffs. JSON files you own,
-versioned with git, shared across Hermes, Codex, Claude Code, or whatever comes
-next.
+`.git` for agent memory. A file-based context layer that any AI agent reads and
+writes — profile, goals, session logs, handoffs. JSON files you own, versioned
+with git, shared across Hermes, Codex, Claude Code, or whatever comes next.
 
 ```bash
 pip install acontext
 ```
 
-## The short version
+## What you get
 
-Every time you switch between agents — or start a new session — the agent pulls
-your context from `~/.acontext/`, reads what happened last time, and picks up
-where you left off. No more "Hi, how can I help you today?" five times a day.
+Add one line to your agent config:
 
-It's just files. You can `cat` everything. You can `git log` everything. You
-can `cp -r ~/.acontext` to a new machine and be done.
+```markdown
+@context-engine/SKILL.md
+```
 
-## How it works
+Next session, your agent does this automatically:
 
-An agent that has AContext wired in will, at session start:
+```
+# session start → git pull (skip if offline)
+# read journals → "上次 coding session 做到一半"
+# read profile → "强哥喜欢直接风格"
+# check goals  → "AContext 开发中 (priority 10)"
+```
 
-1. `git pull --rebase` your context directory (or skip if you're offline)
-2. Read its own journal — what did we do last session?
-3. Optionally read sibling journals — what did Codex do while Hermes was idle?
-4. Load your profile, active goals, learned rules
-5. Check the tone — task mode, playful, reflective, etc.
-6. Decide if it should greet you or just shut up and get to work
-
-At session end, it writes everything back as structured JSON and commits.
+Session ends, it writes everything back and commits.
 
 ```python
 from acontext import AContext
@@ -38,91 +34,57 @@ ctx = AContext("~/.acontext")
 ctx.profile.update({"preferences": [
     {"value": "开门见山", "source": "manual", "added": "2026-06-20"}
 ]})
-ctx.narratives.append({
-    "signal": "关键决策", "agent": "codex",
-    "summary": "迁移到Remix"
-})
 ```
 
-## Why not just use the agent's built-in memory?
+## Install
 
-Because it's locked in that agent. Switch from ChatGPT to Claude Code and your
-memory is gone. AContext is a file. You own it. Any agent with filesystem access
-can read it.
+```bash
+git clone git@github.com:zhaoguoqiang-hub/context-engine.git ~/context-engine
+ln -sfn ~/context-engine ~/.agents/skills/context-engine   # or ~/.codex/skills/
+```
 
-Also, most "memory" systems are black boxes. You can't inspect them, edit them,
-or back them up. AContext is JSON + git. If you can use `cat` and `git`, you
-have full control.
+Then add `@context-engine/SKILL.md` to your `AGENTS.md` or `CLAUDE.md`.
 
-## Who's this for
+### Data directory (`~/.acontext/`)
 
-People who run multiple AI agents and want them to feel like the same assistant.
-People who care about owning their data. People who've been burned by "we'll
-remember that" and then it doesn't.
+```bash
+mkdir ~/.acontext && cd ~/.acontext && git init
+# optional: add a remote for cross-machine sync
+git remote add origin <your-private-repo>
+```
 
-Currently tested on Hermes Agent and Codex. The spec is agent-agnostic.
+Without a remote, local git works fine — pull/push are skipped when offline.
 
-## Project layout
+## Directory layout
 
 ```
 ~/.acontext/          ← your data, your git repo
 context-engine/       ← this repo
-├── SKILL.md          ← agent integration instructions
-├── spec/             ← the file format spec (anyone can implement)
-├── sub/              ← 10 sub-skills (atmos, handoff, feedback, etc.)
+├── SKILL.md          ← agent instructions
+├── spec/             ← file format spec (any agent can implement)
+├── sub/              ← 10 sub-skills
 ├── libs/python/      ← pip install acontext
-├── memory/           ← seed data to get started
-└── references/       ← QA report, UX review, etc.
+└── memory/           ← seed data
 ```
 
-## Quick start (agent setup)
+## Agent commands
 
-Add one line to your `AGENTS.md` / `CLAUDE.md`:
+| Say this | Effect |
+|----------|--------|
+| `"新话题"` / `"fresh"` | 独立会话，不读历史 |
+| `"继续"` | 主动延续上下文 |
+| `"+"` / `"-"` after reply | 告诉 agent 语气对了还是错了 |
+| `"当前状态"` | 当前目标 + 近期决策 |
+| `"什么模式"` | 当前 atmosphere 模式 |
 
-```markdown
-@context-engine/SKILL.md
-```
+## What this isn't
 
-Then symlink the skill:
-
-```bash
-git clone git@github.com:zhaoguoqiang-hub/context-engine.git ~/context-engine
-ln -sfn ~/context-engine ~/.agents/skills/context-engine
-```
-
-That's it. Next session, the agent runs the protocol.
-
-### If you want cross-machine sync
-
-```bash
-cd ~/.acontext
-git remote add origin <your-private-repo-url>
-```
-
-Without a remote, everything works locally — you just won't sync across
-machines. Git pull/push are skipped gracefully when there's no network.
-
-## What you can tell your agent
-
-| Say this | It does |
-|----------|---------|
-| "新话题" / "fresh" | Fresh session, skip past context |
-| "继续" | Explicit continuity |
-| "+" / "-" after reply | Tells the agent the tone was right or wrong |
-| "当前状态" | Shows active goals + recent decisions |
-| "什么模式" | Shows current atmosphere mode |
-
-## Anti-features (what it doesn't do)
-
-- No server. No database. No cloud dependency.
-- No vector embeddings. No RAG. No LLM calls on your context data.
-- No automatic "learning" that you can't see, edit, or delete.
-- No lock-in. All files are standard JSON.
+- No server. No database. No cloud.
+- No vector embeddings, no RAG, no "AI learning" you can't inspect.
+- No lock-in — all files are plain JSON. `cat` and `git log` everything.
 
 ## Status
 
-v2.7 — running daily on Hermes + Codex. The spec is stable. The library is
-usable. Feedback loop, atmosphere engine, handoff protocol, and git sync have
-been through real-world use.
+v2.7 — running daily on Hermes + Codex. The spec is stable and agent-agnostic.
 
 [CHANGELOG](CHANGELOG.md) · [Spec](spec/context-spec-v1.md) · [QA Report](references/qa-report.md)
